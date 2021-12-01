@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'authapp',
+    'baskets',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'authapp.User'
 
 DJANGO_SETTINGS_MODULE = 'geekshop.settings'
+LOGIN_URL = '/users/login'
