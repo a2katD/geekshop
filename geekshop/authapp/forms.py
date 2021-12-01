@@ -7,7 +7,7 @@ from authapp.validator import validate_name
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(),validators=[validate_name])
+    username = forms.CharField(widget=forms.TextInput(), validators=[validate_name])
 
     class Meta:
         model = User
@@ -17,14 +17,9 @@ class UserLoginForm(AuthenticationForm):
         super(UserLoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
         self.fields['password'].widget.attrs['placeholder'] = 'Введите пароль'
+
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
-
-    # def clean_username(self):
-    #     data = self.cleaned_data['username']
-    #     if not data.isalpha():
-    #         raise ValidationError('Имя пользователя не дожно содержать цифр')
-    #     return data
 
 
 class UserRegisterForm(UserCreationForm):
@@ -40,6 +35,7 @@ class UserRegisterForm(UserCreationForm):
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите  фамилию'
         self.fields['password1'].widget.attrs['placeholder'] = 'Введите пароль'
         self.fields['password2'].widget.attrs['placeholder'] = 'Повторите пароль'
+
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
@@ -56,6 +52,7 @@ class UserProfilerForm(UserChangeForm):
         super(UserProfilerForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
+
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
