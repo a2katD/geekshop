@@ -51,9 +51,10 @@ def profile(request):
     if request.method == 'POST':
         form = UserProfilerForm(instance=request.user, data=request.POST, files=request.FILES)
         if form.is_valid():
+            messages.success(request, 'Вы успешно cохранили изменения')
             form.save()
         else:
-            print(form.errors)
+            messages.error(request, form.errors)
     context = {
         'title': 'Geekshop | Профиль',
         'form' : UserProfilerForm(instance=request.user),
