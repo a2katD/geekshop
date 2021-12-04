@@ -64,6 +64,7 @@ def profile(request):
     }
     return render(request, 'authapp/profile.html', context)
 
+
 def logout(request):
     auth.logout(request)
     return render(request, 'mainapp/index.html')
