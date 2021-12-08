@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, ProductCreateForm, CategoryCreateForm, \
-    CategoryUpdateForm
+    CategoryUpdateForm, ProductUpdateForm
 from authapp.models import User
 from mainapp.models import Product, ProductCategory
 
@@ -153,7 +153,7 @@ def admin_products_create(request):
 def admin_products_update(request, pk):
     product_select = Product.objects.get(pk=pk)
     if request.method == 'POST':
-        form = CategoryUpdateForm(data=request.POST, instance=product_select, files=request.FILES)
+        form = ProductUpdateForm(data=request.POST, instance=product_select, files=request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('admins:admin_products'))
