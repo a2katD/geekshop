@@ -158,9 +158,9 @@ def admin_products_update(request, pk):
             form.save()
             return HttpResponseRedirect(reverse('admins:admin_products'))
     else:
-        form = CategoryUpdateForm(instance=product_select)
+        form = ProductUpdateForm(instance=product_select)
     context = {
-        'title': 'Geekshop - Админ | Обновление',
+        'title': 'Geekshop - Админ | Обновление товара',
         'form': form,
         'product_select': product_select
     }

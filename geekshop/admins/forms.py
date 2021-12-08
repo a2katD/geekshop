@@ -57,13 +57,14 @@ class ProductCreateForm(forms.ModelForm):
 class ProductUpdateForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('name', 'image', 'description', 'price', 'quantity', 'quantity')
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
-        super(ProductUpdateForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+            field.help_text = ''
         self.fields['category'].widget.attrs['class'] = 'related-widget-wrapper'
 
 
