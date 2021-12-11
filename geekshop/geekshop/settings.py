@@ -130,3 +130,5 @@ AUTH_USER_MODEL = 'authapp.User'
 
 DJANGO_SETTINGS_MODULE = 'geekshop.settings'
 LOGIN_URL = '/users/login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
