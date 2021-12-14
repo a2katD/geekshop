@@ -1,12 +1,7 @@
-from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.utils.decorators import method_decorator
-from django.views.generic import ListView, UpdateView, DeleteView, CreateView, TemplateView
-from django.urls import reverse, reverse_lazy
-
-from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, ProductCreateForm, CategoryCreateForm, \
-    CategoryUpdateForm, ProductUpdateForm
+from django.urls import reverse_lazy
+from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView, TemplateView
+from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryUpdateFormAdmin, ProductsForm
 from authapp.models import User
 from mainapp.mixin import BaseClassContextMixin, CustomDispatchMixin
 from mainapp.models import Product, ProductCategory
@@ -19,7 +14,7 @@ class IndexTemplateView(TemplateView):
 class UserListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = User
     template_name = 'admins/admin-users-read.html'
-    title = 'Geekshop - Админ | Список пользователей'
+    title = 'Админка | Пользователи'
 
 
 class UserCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
@@ -27,7 +22,7 @@ class UserCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
     template_name = 'admins/admin-users-create.html'
     form_class = UserAdminRegisterForm
     success_url = reverse_lazy('admins:admin_users')
-    title = 'Geekshop - Админ | Создать пользователя'
+    title = 'Админка | Создать пользователя'
 
 
 class UserUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
@@ -35,7 +30,7 @@ class UserUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
     template_name = 'admins/admin-users-update-delete.html'
     form_class = UserAdminProfileForm
     success_url = reverse_lazy('admins:admin_users')
-    title = 'Geekshop - Админ | Изменить пользователя'
+    title = 'Админка | Обновить пользователя'
 
 
 class UserDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
@@ -43,7 +38,7 @@ class UserDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
     template_name = 'admins/admin-users-update-delete.html'
     form_class = UserAdminProfileForm
     success_url = reverse_lazy('admins:admin_users')
-    title = 'Geekshop - Админ | Удалить пользователя'
+    title = 'Админка | Удалить пользователя'
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -55,91 +50,72 @@ class UserDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
 class CategoryListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = ProductCategory
     template_name = 'admins/admin-category-read.html'
-    title = 'Geekshop - Админ | Список категорий'
+    title = 'Админка | Список категорий'
 
-
-class CategoryCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
-    model = ProductCategory
-    template_name = 'admins/admin-category-create.html'
-    form_class = CategoryCreateForm
-    success_url = reverse_lazy('admins:admin_category')
-    title = 'Geekshop - Админ | Создать категорию'
-
-
-class CategoryUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
-    model = ProductCategory
-    template_name = 'admins/admin-category-update-delete.html'
-    form_class = CategoryUpdateForm
-    success_url = reverse_lazy('admins:admin_category')
-    title = 'Geekshop - Админ | Обновление категории'
+    def get_queryset(self):
+        if self.kwargs:
+            return ProductCategory.objects.filter(id=self.kwargs.get('pk'))
+        else:
+            return ProductCategory.objects.all()
 
 
 class CategoryDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
     model = ProductCategory
     template_name = 'admins/admin-category-update-delete.html'
     success_url = reverse_lazy('admins:admin_category')
-    title = 'Geekshop - Админ | Удаление категории'
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        if self.object.is_active:
-            self.object.is_active = False
-        else:
-            self.object.is_active = True
+        self.object.is_active = False if self.object.is_active else True
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class CategoryUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
+    model = ProductCategory
+    template_name = 'admins/admin-category-update-delete.html'
+    form_class = CategoryUpdateFormAdmin
+    title = 'Админка | Обновления категории'
+    success_url = reverse_lazy('admins:admin_category')
+
+
+class CategoryCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
+    model = ProductCategory
+    template_name = 'admins/admin-category-create.html'
+    success_url = reverse_lazy('admins:admin_category')
+    form_class = CategoryUpdateFormAdmin
+    title = 'Админка | Создание категории'
 
 
 class ProductListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
     template_name = 'admins/admin-product-read.html'
-    title = 'Geekshop - Админ | Список товаров'
+    title = 'Админка | Обновления категории'
 
 
-class ProductCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
+class ProductsUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
-    template_name = 'admins/admin-product-create.html'
-    form_class = ProductCreateForm
-    success_url = reverse_lazy('admins:admin_products')
-    title = 'Geekshop - Админ | Создать товар'
+    template_name = 'admins/admin-products-update-delete.html'
+    form_class = ProductsForm
+    title = 'Админка | Обновление продукта'
+    success_url = reverse_lazy('admins:admins_product')
 
 
-class ProductUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
+class ProductsCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
-    template_name = 'admins/admin-product-update-delete.html'
-    form_class = ProductUpdateForm
-    success_url = reverse_lazy('admins:admin_products')
-    title = 'Geekshop - Админ | Изменение товара'
+    template_name = 'admins/admin-products-create.html'
+    form_class = ProductsForm
+    title = 'Админка | Создание продукта'
+    success_url = reverse_lazy('admins:admins_product')
 
 
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_products_update(request, pk):
-#     product_select = Product.objects.get(pk=pk)
-#     if request.method == 'POST':
-#         form = ProductUpdateForm(data=request.POST, instance=product_select, files=request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('admins:admin_products'))
-#     else:
-#         form = ProductUpdateForm(instance=product_select)
-#     context = {
-#         'title': 'Geekshop - Админ | Обновление товара',
-#         'form': form,
-#         'product_select': product_select
-#     }
-#     return render(request, '', context)
-
-class ProductDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
-    model = ProductCategory
-    template_name = 'admins/admin-product-update-delete.html'
-    success_url = reverse_lazy('admins:admin_products')
-    title = 'Geekshop - Админ | Удаление товара'
+class ProductsDeleteView(DeleteView, CustomDispatchMixin):
+    model = Product
+    template_name = 'admins/admin-product-read.html'
+    success_url = reverse_lazy('admins:admins_product')
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        if self.object.is_active:
-            self.object.is_active = False
-        else:
-            self.object.is_active = True
+        self.object.is_active = False if self.object.is_active else True
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())

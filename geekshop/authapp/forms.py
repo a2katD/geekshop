@@ -1,14 +1,10 @@
-from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
-from django.core.exceptions import ValidationError
+from django import forms
 
 from authapp.models import User
-from authapp.validator import validate_name
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(), validators=[validate_name])
-
     class Meta:
         model = User
         fields = ('username', 'password')
@@ -17,7 +13,6 @@ class UserLoginForm(AuthenticationForm):
         super(UserLoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
         self.fields['password'].widget.attrs['placeholder'] = 'Введите пароль'
-
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
@@ -35,15 +30,13 @@ class UserRegisterForm(UserCreationForm):
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите  фамилию'
         self.fields['password1'].widget.attrs['placeholder'] = 'Введите пароль'
         self.fields['password2'].widget.attrs['placeholder'] = 'Повторите пароль'
-
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
 
 class UserProfilerForm(UserChangeForm):
-    first_name = forms.CharField(widget=forms.TextInput(), validators=[validate_name])
-    image = forms.ImageField(widget=forms.FileInput, required=False)
-    age = forms.IntegerField(widget=forms.NumberInput, required=False)
+    image = forms.ImageField(widget=forms.FileInput(), required=False)
+    age = forms.IntegerField(widget=forms.NumberInput(), required=False)
 
     class Meta:
         model = User

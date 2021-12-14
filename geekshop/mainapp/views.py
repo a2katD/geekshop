@@ -2,6 +2,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
 import os
 import json
+
+from django.views.generic import DetailView
+
 from mainapp.models import ProductCategory, Product
 
 MODULE_DIR = os.path.dirname(__file__)
@@ -36,3 +39,8 @@ def products(request, id_category=None, page=1):
     context['products'] = products_paginator
     context['categories'] = ProductCategory.objects.all()
     return render(request, 'mainapp/products.html', context)
+
+
+class ProductDetail(DetailView):
+    model = Product
+    template_name = 'mainapp/detail.html'

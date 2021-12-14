@@ -1,9 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 
 from authapp.forms import UserRegisterForm, UserProfilerForm
 from authapp.models import User
-from mainapp.models import Product, ProductCategory
+from mainapp.models import ProductCategory, Product
 
 
 class UserAdminRegisterForm(UserRegisterForm):
@@ -35,60 +34,49 @@ class UserAdminProfileForm(UserProfilerForm):
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
 
 
-class ProductCreateForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = ('name', 'image', 'description', 'price', 'quantity', 'category')
-
-    def __init__(self, *args, **kwargs):
-        super(ProductCreateForm, self).__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs['placeholder'] = 'Введите назвение'
-        self.fields['price'].widget.attrs['placeholder'] = 'Введите цену'
-        self.fields['quantity'].widget.attrs['placeholder'] = 'Введите количество'
-        self.fields['image'].widget.attrs['placeholder'] = 'Встаьте изображение'
-        self.fields['description'].widget.attrs['placeholder'] = 'Введите описание'
-        self.fields['category'].widget.attrs['placeholder'] = 'Введите описание'
-
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control py-4'
-        self.fields['image'].widget.attrs['class'] = 'custom-file-input'
-
-
-class ProductUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control py-4'
-            field.help_text = ''
-        self.fields['category'].widget.attrs['class'] = 'related-widget-wrapper'
-
-
-class CategoryCreateForm(forms.ModelForm):
+class CategoryUpdateFormAdmin(forms.ModelForm):
     class Meta:
         model = ProductCategory
         fields = ('name', 'description')
 
     def __init__(self, *args, **kwargs):
-        super(CategoryCreateForm, self).__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs['placeholder'] = 'Введите назвение'
-        self.fields['description'].widget.attrs['placeholder'] = 'Введите описание'
-
+        super(CategoryUpdateFormAdmin, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
 
-class CategoryUpdateForm(forms.ModelForm):
+class ProductsForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=ProductCategory.objects.all())
+    image = forms.ImageField(widget=forms.FileInput)
+
     class Meta:
-        model = ProductCategory
-        fields = ('name', 'description', 'is_active')
+        model = Product
+        fields = ['name', 'description', 'price', 'quantity', 'category', 'image']
 
     def __init__(self, *args, **kwargs):
-        super(CategoryUpdateForm, self).__init__(*args, **kwargs)
-
+        super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control py-4'
+            if field_name == 'category':
+                field.widget.attrs['class'] = 'form-control'
+            else:
+                field.widget.attrs['class'] = 'form-control py-4'
+        self.fields['image'].widget.attrs['class'] = 'custom-file-input'
+
+
+class ProductUpdate(ProductsForm):
+    category = forms.ModelChoiceField(queryset=ProductCategory.objects.all().select_related(),
+                                      empty_label=None)
+    image = forms.ImageField(widget=forms.FileInput, required=False)
+
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'price', 'quantity', 'category', 'image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name == 'category':
+                field.widget.attrs['class'] = 'form-control'
+            else:
+                field.widget.attrs['class'] = 'form-control py-4'
+        self.fields['image'].widget.attrs['class'] = 'custom-file-input'

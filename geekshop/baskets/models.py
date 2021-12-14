@@ -5,7 +5,6 @@ from authapp.models import User
 from mainapp.models import Product
 
 
-
 class Basket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -21,8 +20,8 @@ class Basket(models.Model):
 
     def total_sum(self):
         baskets = Basket.objects.filter(user=self.user)
-        return  sum(basket.sum() for basket in baskets)
+        return sum(basket.sum() for basket in baskets)
 
     def total_quantity(self):
         baskets = Basket.objects.filter(user=self.user)
-        return  sum(basket.quantity for basket in baskets)
+        return sum(basket.quantity for basket in baskets)

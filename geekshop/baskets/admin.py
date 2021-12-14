@@ -1,6 +1,10 @@
 from django.contrib import admin
-#
-# # Register your models here.
-# from authapp.models import User
-#
-# admin.site.register(User)
+
+from baskets.models import Basket
+
+
+class BasketAdmin(admin.TabularInline):
+    model = Basket
+    fields = ('product', 'quantity')
+    readonly_fields = ('create_timestamp', 'update_timestamp')
+    extra = 0
