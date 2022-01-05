@@ -1,3 +1,4 @@
+
 /	mainapp.views.index	index
 /admin/	django.contrib.admin.sites.index	admin:index
 /admin/<app_label>/	django.contrib.admin.sites.app_index	admin:app_list
