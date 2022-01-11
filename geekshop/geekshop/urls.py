@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
 
 import debug_toolbar
 from mainapp.views import index
@@ -31,6 +32,7 @@ urlpatterns = [
     path('orders/', include('ordersapp.urls', namespace='orders')),
 
     path('', include('social_django.urls', namespace='social')),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 ]
 
 if settings.DEBUG:
