@@ -26,7 +26,7 @@ class Basket(models.Model):
     update_timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Корзина для {self.user.name} | Продукт {self.product.name}'
+        return f'Корзина для {self.user.username} | Продукт {self.product.name}'
 
     @cached_property
     def get_items_cached(self):
