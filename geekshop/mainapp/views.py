@@ -5,6 +5,7 @@ import json
 
 from django.conf import settings
 from django.core.cache import cache
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView
 
 from mainapp.models import ProductCategory, Product
@@ -52,7 +53,6 @@ def index(request):
         'title': 'Geekshop',
     }
     return render(request, 'mainapp/index.html', context)
-
 
 def products(request, id_category=None, page=1):
     context = {
