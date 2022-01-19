@@ -78,7 +78,6 @@ def products(request, id_category=None, page=1):
     context['categories'] = get_link_category()
     return render(request, 'mainapp/products.html', context)
 
-@cache_page(3600)
 class ProductDetail(DetailView):
     model = Product
     template_name = 'mainapp/detail.html'
