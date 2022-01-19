@@ -57,7 +57,7 @@
 											{% endif %}
 										</td>
 										<td>
-											<form action="{% url 'admins:admins_product_delete' product.id %}"
+											<form action="{% url 'admins:admin_product_delete' product.id %}"
 											      method="post">
 												{% csrf_token %}
 												<input class="btn btn-danger btn-block" type="submit" value="Удалить">
@@ -65,7 +65,7 @@
 										</td>
 										<td>
 
-											<a href="{% url 'admins:admins_product_update' product.id %}">
+											<a href="{% url 'admins:admin_product_update' product.id %}">
 												<input class="btn btn-success btn-block" type="submit" value="Изменить">
 											</a>
 										</td>
@@ -76,7 +76,7 @@
 						</div>
 					</div>
 					<div class="card-footer">
-						<a href="{% url 'admins:admins_product_create' %}">
+						<a href="{% url 'admins:admin_product_create' %}">
 							<button class="btn btn-success">Создать продукт</button>
 						</a>
 					</div>
