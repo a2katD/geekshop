@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
+from django.views.decorators.cache import cache_page
 from django.views.generic import FormView, UpdateView
 
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfilerForm, UserProfileEditForm
@@ -12,12 +13,10 @@ from authapp.models import User
 from baskets.models import Basket
 from mainapp.mixin import BaseClassContextMixin, UserDispatchMixin
 
-
 class LoginListView(LoginView, BaseClassContextMixin):
     template_name = 'authapp/login.html'
     form_class = UserLoginForm
     title = 'GeekShop - Авторизация'
-
 
 class RegisterListView(FormView, BaseClassContextMixin):
     model = User
@@ -61,7 +60,6 @@ class RegisterListView(FormView, BaseClassContextMixin):
             return render(self, 'authapp/verification.html')
         except Exception as e:
             return HttpResponseRedirect(reverse('index'))
-
 
 class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
     template_name = 'authapp/profile.html'
