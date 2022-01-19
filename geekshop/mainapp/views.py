@@ -14,6 +14,7 @@ MODULE_DIR = os.path.dirname(__file__)
 
 # Create your views here.
 
+
 def get_link_category():
     if settings.LOW_CACHE:
         key = 'link_category' 
@@ -47,13 +48,14 @@ def get_product(pk):
     else:
         return Product.objects.get(id=pk)
 
-
+@cache_page(3600)
 def index(request):
     context = {
         'title': 'Geekshop',
     }
     return render(request, 'mainapp/index.html', context)
 
+@cache_page(3600)
 def products(request, id_category=None, page=1):
     context = {
         'title': 'Geekshop - Товары',
@@ -76,7 +78,7 @@ def products(request, id_category=None, page=1):
     context['categories'] = get_link_category()
     return render(request, 'mainapp/products.html', context)
 
-
+@cache_page(3600)
 class ProductDetail(DetailView):
     model = Product
     template_name = 'mainapp/detail.html'

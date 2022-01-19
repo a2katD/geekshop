@@ -12,13 +12,13 @@ from authapp.models import User
 from baskets.models import Basket
 from mainapp.mixin import BaseClassContextMixin, UserDispatchMixin
 
-
+@cache_page(3600)
 class LoginListView(LoginView, BaseClassContextMixin):
     template_name = 'authapp/login.html'
     form_class = UserLoginForm
     title = 'GeekShop - Авторизация'
 
-
+@cache_page(3600)
 class RegisterListView(FormView, BaseClassContextMixin):
     model = User
     template_name = 'authapp/register.html'
@@ -62,7 +62,7 @@ class RegisterListView(FormView, BaseClassContextMixin):
         except Exception as e:
             return HttpResponseRedirect(reverse('index'))
 
-
+@cache_page(3600)
 class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
     template_name = 'authapp/profile.html'
     form_class = UserProfilerForm
