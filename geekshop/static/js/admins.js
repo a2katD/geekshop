@@ -6,4 +6,4 @@ window.onload = function () {
         $('#language_site').trigger('click');
         lang.type = "hidden";
     });
-} 
+}

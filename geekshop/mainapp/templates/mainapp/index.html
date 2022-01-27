@@ -2,27 +2,135 @@
 {% load static %}
 
 {% block css %}
-<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
-<link href="{% static 'css/index.css'%}" rel="stylesheet">
+	<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/index.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<section>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6">
-				<h1 class="mt-5">GeekShop Store</h1>
-				<p>
-					Новые образы и лучшие бренды на GeekShop Store.
-					Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.
-				</p>
-				<button id="start-purchase-btn" type="button" class="btn btn-lg">
-					<a id="start-purchase-link" href="{% url 'mainapp:products' %}">
-						Начать покупки
-					</a>
-				</button>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="categories_grid">
+
+						<div class="category_1">
+							<a href="{% url 'mainapp:products' %}" class="category_item">
+								<img style="width: 40%;height: 10%;display: block"
+								     src="{% static 'vendor/img/category/category1.jpg' %}">
+							</a>
+						</div>
+
+						<div class="category_2">
+							<a href="{% url 'mainapp:products' %}" class="category_item">
+								<img style="width: 40%;height: 10%; display: block"
+								     src="{% static 'vendor/img/category/category2.jpg' %}">
+							</a>
+						</div>
+
+						<div class="category_3">
+							<a href="{% url 'mainapp:products' %}" class="category_item">
+								<img style="width: 40%;height: 10%;display: block"
+								     src="{% static 'vendor/img/category/category3.jpg' %}">
+							</a>
+						</div>
+
+						<div class="category_4">
+							<div class="category_grid_box">
+								<span class="category_item_bkg"
+								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/wok.jpg)"></span>
+								<a href="https://sushifast.ru/product-category/wok/" class="category_item">
+									<span class="category_name">Лапша «Wok»													</span>
+								</a>
+							</div>
+						</div>
+
+						<div class="category_5">
+							<div class="category_grid_box">
+								<span class="category_item_bkg"
+								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/coffee-cup.jpg)"></span>
+								<a href="https://sushifast.ru/product-category/drinks/" class="category_item">
+									<span class="category_name">Напитки													</span>
+								</a>
+							</div>
+						</div>
+
+						<div class="category_6">
+							<div class="category_grid_box">
+								<span class="category_item_bkg"
+								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/sushi-roll-set.jpg)"></span>
+								<a href="https://sushifast.ru/product-category/sets/" class="category_item">
+									<span class="category_name">Сеты													</span>
+								</a>
+							</div>
+						</div>
+
+						<div class="category_more_than_6">
+							<div class="category_grid_box">
+								<span class="category_item_bkg"
+								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/hot.jpg)"></span>
+								<a href="https://sushifast.ru/product-category/hot/" class="category_item">
+									<span class="category_name">Горячее													</span>
+								</a>
+							</div>
+						</div>
+
+						<div class="category_more_than_6">
+							<div class="category_grid_box">
+								<span class="category_item_bkg"
+								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/miso-soup.jpg)"></span>
+								<a href="https://sushifast.ru/product-category/soup/" class="category_item">
+									<span class="category_name">Супы													</span>
+								</a>
+							</div>
+						</div>
+
+						<div class="category_more_than_6">
+							<div class="category_grid_box">
+								<span class="category_item_bkg"
+								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/salad.jpg)"></span>
+								<a href="https://sushifast.ru/product-category/salads/" class="category_item">
+									<span class="category_name">Салаты													</span>
+								</a>
+							</div>
+						</div>
+
+						<div class="category_more_than_6">
+							<div class="category_grid_box">
+								<span class="category_item_bkg"
+								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/07/lucky-roll.jpg)"></span>
+								<a href="https://sushifast.ru/product-category/desert/" class="category_item">
+									<span class="category_name">Десерты													</span>
+								</a>
+							</div>
+						</div>
+
+						<div class="category_more_than_6">
+							<div class="category_grid_box">
+								<span class="category_item_bkg"
+								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/10/soeviy-sous1.jpg)"></span>
+								<a href="https://sushifast.ru/product-category/sauce/" class="category_item">
+									<span class="category_name">Соусы													</span>
+								</a>
+							</div>
+						</div>
+
+						<div class="clearfix"></div>
+
+					</div>
+
+
+					{#				<h1 class="mt-5">GeekShop Store</h1>#}
+					{#				<p>#}
+					{#					Новые образы и лучшие бренды на GeekShop Store.#}
+					{#					Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.#}
+					{#				</p>#}
+					{#				<button id="start-purchase-btn" type="button" class="btn btn-lg">#}
+					{#					<a id="start-purchase-link" href="{% url 'mainapp:products' %}">#}
+					{#						Начать покупки#}
+					{#					</a>#}
+					{#				</button>#}
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
 {% endblock %}
