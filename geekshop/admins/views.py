@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView, TemplateView
 from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryUpdateFormAdmin, ProductsForm
 from authapp.models import User
@@ -66,9 +67,17 @@ class CategoryDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin)
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.is_active = False if self.object.is_active else True
+        if self.object.is_active:
+            self.object.product_set.update(is_active=False)
+            self.object.is_active = False
+        else:
+            self.object.is_active = True
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(CategoryDeleteView, self).dispatch(request, *args, **kwargs)
 
 
 class CategoryUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
