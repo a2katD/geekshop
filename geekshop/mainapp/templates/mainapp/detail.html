@@ -19,6 +19,23 @@
 				<div class="card-body to-card">
 					<h1 class="name-detail">{{ product.name }}</h1>
 					<br>
+					{% if product.category.id == 1 %}
+						<p class="text-detail">Количество: 8шт</p>
+						<p class="text-detail">Вес: 220г</p>
+					{% endif %}
+					{% if product.category.id == 2 %}
+						<p class="text-detail">Диаметр: 32см</p>
+						<p class="text-detail">Вес: 820г</p>
+					{% endif %}
+					{% if product.category.id == 3 %}
+						<p class="text-detail">Вес: 150г</p>
+					{% endif %}
+					{% if product.category.id == 4 %}
+						<p class="text-detail">Вес: 300г</p>
+					{% endif %}
+					{% if product.category.id == 5 %}
+						<p class="text-detail">Вес: 220г</p>
+					{% endif %}
 					<p class="text-detail">Цена {{ product.price }} руб</p>
 					<p class="text-detail">Состав {{ product.description }}</p>
 				</div>
@@ -26,13 +43,4 @@
 
 		</div>
 	</div>
-{% endblock %}
-
-{% block footer %}
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; GeekShop 2020</p>
-		</div>
-		<!-- /.container -->
-	</footer>
 {% endblock %}

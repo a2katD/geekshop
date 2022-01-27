@@ -16,13 +16,13 @@ from mainapp.mixin import BaseClassContextMixin, UserDispatchMixin
 class LoginListView(LoginView, BaseClassContextMixin):
     template_name = 'authapp/login.html'
     form_class = UserLoginForm
-    title = 'GeekShop - Авторизация'
+    title = 'DailySushi - Авторизация'
 
 class RegisterListView(FormView, BaseClassContextMixin):
     model = User
     template_name = 'authapp/register.html'
     form_class = UserRegisterForm
-    title = 'GeekShop - Регистрация'
+    title = 'DailySushi - Регистрация'
     success_url = reverse_lazy('auth:login')
 
     def post(self, request, *args, **kwargs):

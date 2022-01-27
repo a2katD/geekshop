@@ -13,124 +13,87 @@
 				<div class="col-lg-12">
 					<div class="categories_grid">
 
-						<div class="category_1">
-							<a href="{% url 'mainapp:products' %}" class="category_item">
-								<img style="width: 40%;height: 10%;display: block"
-								     src="{% static 'vendor/img/category/category1.jpg' %}">
+						<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+							<ol class="carousel-indicators">
+								<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+							</ol>
+							<div class="carousel-inner" role="listbox">
+								<div class="carousel-item active">
+									<img class="d-block img-fluid" src="{% static  'vendor/img/slides/slide-1.jpg' %}"
+									     alt="First slide">
+								</div>
+								<div class="carousel-item">
+									<img class="d-block img-fluid" src="{% static  'vendor/img/slides/slide-2.jpg' %}"
+									     alt="Second slide">
+								</div>
+								<div class="carousel-item">
+									<img class="d-block img-fluid" src="{% static  'vendor/img/slides/slide-3.jpg' %}"
+									     alt="Third slide">
+								</div>
+							</div>
+							<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+							   data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+							   data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
 							</a>
 						</div>
+						<img class="vc_single_image-img"
+						     src="https://dailysushi.ru/wp-content/uploads/2020/07/menyu_background-550x162.jpg"
+						     width="550" height="162" alt="" title="">
 
-						<div class="category_2">
-							<a href="{% url 'mainapp:products' %}" class="category_item">
-								<img style="width: 40%;height: 10%; display: block"
-								     src="{% static 'vendor/img/category/category2.jpg' %}">
-							</a>
-						</div>
-
-						<div class="category_3">
-							<a href="{% url 'mainapp:products' %}" class="category_item">
-								<img style="width: 40%;height: 10%;display: block"
-								     src="{% static 'vendor/img/category/category3.jpg' %}">
-							</a>
-						</div>
-
-						<div class="category_4">
-							<div class="category_grid_box">
-								<span class="category_item_bkg"
-								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/wok.jpg)"></span>
-								<a href="https://sushifast.ru/product-category/wok/" class="category_item">
-									<span class="category_name">Лапша «Wok»													</span>
+						<div class="category_index">
+							<div class="category_index_block ">
+								<a href="{% url 'mainapp:category' 1 %}" class="category_item nav-item">
+									<img style="width: 345px"
+									     src="{% static 'vendor/img/category/category1.jpg' %}">
+									<br>
+									<h2>Роллы</h2>
+								</a>
+							</div>
+							<div class="category_index_block">
+								<a href="{% url 'mainapp:category' 2 %}" class="category_item nav-item">
+									<img style="width: 345px"
+									     src="{% static 'vendor/img/category/category2.jpg' %}">
+									<br>
+									<h2>Пиццы</h2>
+								</a>
+							</div>
+							<div class="category_index_block">
+								<a href="{% url 'mainapp:category' 3 %}" class="category_item nav-item">
+									<img style="width: 345px"
+									     src="{% static 'vendor/img/category/category3.jpg' %}">
+									<br>
+									<h2>Горячее</h2>
+								</a>
+							</div>
+							<div class="category_index_block">
+								<a href="{% url 'mainapp:category' 4 %}" class="category_item nav-item">
+									<img style="width: 345px"
+									     src="{% static 'vendor/img/category/category4.jpg' %}">
+									<br>
+									<h2>Супы</h2>
+								</a>
+							</div>
+							<div class="category_index_block">
+								<a href="{% url 'mainapp:category' 5 %}" class="category_item nav-item">
+									<img style="width: 345px"
+									     src="{% static 'vendor/img/category/category5.jpg' %}">
+									<br>
+									<h2>Cалаты</h2>
 								</a>
 							</div>
 						</div>
-
-						<div class="category_5">
-							<div class="category_grid_box">
-								<span class="category_item_bkg"
-								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/coffee-cup.jpg)"></span>
-								<a href="https://sushifast.ru/product-category/drinks/" class="category_item">
-									<span class="category_name">Напитки													</span>
-								</a>
-							</div>
-						</div>
-
-						<div class="category_6">
-							<div class="category_grid_box">
-								<span class="category_item_bkg"
-								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/sushi-roll-set.jpg)"></span>
-								<a href="https://sushifast.ru/product-category/sets/" class="category_item">
-									<span class="category_name">Сеты													</span>
-								</a>
-							</div>
-						</div>
-
-						<div class="category_more_than_6">
-							<div class="category_grid_box">
-								<span class="category_item_bkg"
-								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/hot.jpg)"></span>
-								<a href="https://sushifast.ru/product-category/hot/" class="category_item">
-									<span class="category_name">Горячее													</span>
-								</a>
-							</div>
-						</div>
-
-						<div class="category_more_than_6">
-							<div class="category_grid_box">
-								<span class="category_item_bkg"
-								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/miso-soup.jpg)"></span>
-								<a href="https://sushifast.ru/product-category/soup/" class="category_item">
-									<span class="category_name">Супы													</span>
-								</a>
-							</div>
-						</div>
-
-						<div class="category_more_than_6">
-							<div class="category_grid_box">
-								<span class="category_item_bkg"
-								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/05/salad.jpg)"></span>
-								<a href="https://sushifast.ru/product-category/salads/" class="category_item">
-									<span class="category_name">Салаты													</span>
-								</a>
-							</div>
-						</div>
-
-						<div class="category_more_than_6">
-							<div class="category_grid_box">
-								<span class="category_item_bkg"
-								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/07/lucky-roll.jpg)"></span>
-								<a href="https://sushifast.ru/product-category/desert/" class="category_item">
-									<span class="category_name">Десерты													</span>
-								</a>
-							</div>
-						</div>
-
-						<div class="category_more_than_6">
-							<div class="category_grid_box">
-								<span class="category_item_bkg"
-								      style="background-image:url(https://sushifast.ru/wp-content/uploads/2016/10/soeviy-sous1.jpg)"></span>
-								<a href="https://sushifast.ru/product-category/sauce/" class="category_item">
-									<span class="category_name">Соусы													</span>
-								</a>
-							</div>
-						</div>
-
-						<div class="clearfix"></div>
-
 					</div>
-
-
-					{#				<h1 class="mt-5">GeekShop Store</h1>#}
-					{#				<p>#}
-					{#					Новые образы и лучшие бренды на GeekShop Store.#}
-					{#					Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.#}
-					{#				</p>#}
-					{#				<button id="start-purchase-btn" type="button" class="btn btn-lg">#}
-					{#					<a id="start-purchase-link" href="{% url 'mainapp:products' %}">#}
-					{#						Начать покупки#}
-					{#					</a>#}
-					{#				</button>#}
 				</div>
 			</div>
 		</div>
 	</section>
 {% endblock %}
+

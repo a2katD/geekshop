@@ -20,11 +20,13 @@ from django.conf.urls.static import static
 from django.conf.urls import url
 
 import debug_toolbar
-from mainapp.views import index
+from mainapp.views import index, action, contacts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('action', action, name='action'),
+    path('contacts', contacts, name='contacts'),
     path('products/', include('mainapp.urls', namespace='mainapp')),
     path('users/', include('authapp.urls', namespace='authapp')),
     path('baskets/', include('baskets.urls', namespace='baskets')),

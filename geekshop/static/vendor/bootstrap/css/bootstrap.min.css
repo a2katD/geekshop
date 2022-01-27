@@ -46,8 +46,11 @@ html {
     -webkit-tap-highlight-color: transparent
 }
 
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+article, aside, figcaption, figure, header, hgroup, main, nav, section {
     display: block
+}
+footer {
+    display: flex;
 }
 
 body {
@@ -100,7 +103,7 @@ p {
     border-image-outset: initial;
     border-image-repeat: initial;
     color: #2d2a2a;
-    font-size: 34px;
+    font-size: 38px;
     font-weight: 600;
     letter-spacing: .04em;
     line-height: 1.2;
@@ -116,8 +119,36 @@ p {
     font-family: Geometria, Arial, Helvetica, sans-serif;
 }
 
+.dim-footer {
+    color: white;
+    font-size: 18px;
+    letter-spacing: .12em;
+    text-align: center;
+}
+
 .text-detail {
-    font-size: 1rem;
+    font-size: 2rem;
+}
+
+.vc_single_image-img {
+    display: block;
+    margin: auto;
+}
+
+h4.menu-categ {
+    padding-top: 80px;
+}
+
+.insta {
+    border-radius: 5%;
+}
+
+.category_index {
+    display: flex;
+    margin-bottom: 100px;
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: center;
 }
 
 abbr[data-original-title], abbr[title] {
@@ -584,7 +615,8 @@ pre code {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-right: -15px;
-    margin-left: -15px
+    margin-left: -15px;
+    padding-top: 20px;
 }
 
 .no-gutters {
@@ -4739,7 +4771,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 
 
 .card {
-    margin-top: 100px;
+    /*margin-top: 100px;*/
     position: relative;
     display: -ms-flexbox;
     display: flex;
