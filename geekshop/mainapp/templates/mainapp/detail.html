@@ -37,7 +37,13 @@
 						<p class="text-detail">Вес: 220г</p>
 					{% endif %}
 					<p class="text-detail">Цена {{ product.price }} руб</p>
-					<p class="text-detail">Состав {{ product.description }}</p>
+					<p class="text-detail">Состав: {{ product.description }}</p>
+
+					<div class="col-lg-3 card-footer text-center">
+						<button type="button" class="btn btn-out ne-success" value="{{ product.id }}">
+							Отправить в корзину
+						</button>
+					</div>
 				</div>
 			</div>
 
