@@ -34,8 +34,8 @@ class UserProfile(models.Model):
     )
 
     user = models.OneToOneField(User, unique=True, null=False, db_index=True, on_delete=models.CASCADE)
-    about = models.TextField(verbose_name='о себе', blank=True, null=True)
-    gender = models.CharField(verbose_name='пол', choices=GENDET_CHOICES, blank=True, max_length=2)
+    about = models.TextField(verbose_name='Комментарий к заказу', blank=True, null=True)
+    gender = models.PositiveIntegerField(default=1)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
