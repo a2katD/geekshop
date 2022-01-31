@@ -65,7 +65,7 @@ class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
     template_name = 'authapp/profile.html'
     form_class = UserProfilerForm
     success_url = reverse_lazy('authapp:profile')
-    title = 'GeekShop - Профиль'
+    title = 'DailySushi - Профиль'
 
     def post(self, request, *args, **kwargs):
         form = UserProfilerForm(data=request.POST, files=request.FILES, instance=request.user)

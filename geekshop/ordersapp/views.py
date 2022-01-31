@@ -16,7 +16,7 @@ from mainapp.mixin import BaseClassContextMixin
 
 class OrderList(ListView, BaseClassContextMixin):
     model = Order
-    title = 'GeekShop | Список заказов'
+    title = 'DailySushi | Список заказов'
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user, is_active=True)
@@ -26,7 +26,7 @@ class OrderCreate(CreateView):
     model = Order
     fields = []
     success_url = reverse_lazy('orders:list')
-    title = 'GeekShop | Создание заказа'
+    title = 'DailySushi | Создание заказа'
 
     def get_context_data(self, **kwargs):
         context = super(OrderCreate, self).get_context_data(**kwargs)
@@ -68,7 +68,7 @@ class OrderUpdate(UpdateView):
     model = Order
     fields = []
     success_url = reverse_lazy('orders:list')
-    title = 'GeekShop | Обновление заказа'
+    title = 'DailySushi | Обновление заказа'
 
     def get_context_data(self, **kwargs):
         context = super(OrderUpdate, self).get_context_data(**kwargs)
@@ -107,13 +107,13 @@ class OrderUpdate(UpdateView):
 
 class OrderDetail(DetailView, BaseClassContextMixin):
     model = Order
-    title = 'GeekShop | Просмотр заказа'
+    title = 'DailySushi | Просмотр заказа'
 
 
 class OrderDelete(DeleteView, BaseClassContextMixin):
     model = Order
     success_url = reverse_lazy('orders:list')
-    title = 'GeekShop | Удаление заказа'
+    title = 'DailySushi | Удаление заказа'
 
 
 def order_forming_complete(request, pk):
