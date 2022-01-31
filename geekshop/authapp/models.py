@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 from django.db import models
 from datetime import timedelta
 
@@ -10,7 +11,9 @@ from django.utils.timezone import now
 
 class User(AbstractUser):
     image = models.ImageField(upload_to='users_image', blank=True)
-    age = models.PositiveIntegerField(default=18)
+    # age = models.PositiveIntegerField(default=18)
+    phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
+    age = models.CharField(validators=[phoneNumberRegex], max_length=16, unique=True)
 
     activation_key = models.CharField(max_length=128, blank=True)
     activation_key_expires = models.DateTimeField(auto_now=True, blank=True, null=True)
