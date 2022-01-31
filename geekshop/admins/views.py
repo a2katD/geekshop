@@ -104,7 +104,7 @@ class ProductListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
 
 class ProductsUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
-    template_name = 'admins/admin-products-update-delete.html'
+    template_name = 'admins/admin-product-update-delete.html'
     form_class = ProductsForm
     title = 'Админка | Обновление продукта'
     success_url = reverse_lazy('admins:admins_product')
@@ -112,7 +112,7 @@ class ProductsUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin)
 
 class ProductsCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
-    template_name = 'admins/admin-products-create.html'
+    template_name = 'admins/admin-product-create.html'
     form_class = ProductsForm
     title = 'Админка | Создание продукта'
     success_url = reverse_lazy('admins:admins_product')
