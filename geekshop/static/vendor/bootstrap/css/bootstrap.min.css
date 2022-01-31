@@ -2758,6 +2758,7 @@ a.btn.disabled, fieldset:disabled a.btn {
 }
 
 .btn-success {
+    margin-bottom: 10px;
     color: #fff;
     background-color: #28a745;
     border-color: #28a745
