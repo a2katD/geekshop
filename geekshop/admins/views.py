@@ -1,8 +1,12 @@
-from django.db.models import F
+from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.shortcuts import render
+
+# Create your views here.
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView, TemplateView
+
 from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryUpdateFormAdmin, ProductsForm
 from authapp.models import User
 from mainapp.mixin import BaseClassContextMixin, CustomDispatchMixin
@@ -13,6 +17,7 @@ class IndexTemplateView(TemplateView):
     template_name = 'admins/admin.html'
 
 
+# Users
 class UserListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = User
     template_name = 'admins/admin-users-read.html'
@@ -49,6 +54,7 @@ class UserDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
         return HttpResponseRedirect(self.get_success_url())
 
 
+# Category
 class CategoryListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = ProductCategory
     template_name = 'admins/admin-category-read.html'
@@ -68,11 +74,7 @@ class CategoryDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin)
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        if self.object.is_active:
-            self.object.product_set.update(is_active=False)
-            self.object.is_active = False
-        else:
-            self.object.is_active = True
+        self.object.is_active = False if self.object.is_active else True
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -84,13 +86,6 @@ class CategoryUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin)
     title = 'Админка | Обновления категории'
     success_url = reverse_lazy('admins:admin_category')
 
-    def form_valid(self, form):
-        if 'discount' in form.cleaned_data:
-            discount = form.cleaned_data['discount']
-            if discount:
-                self.object.product_set.update(price=F('price') * (1 - discount / 100))
-            return HttpResponseRedirect(self.get_success_url())
-
 
 class CategoryCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
     model = ProductCategory
@@ -100,6 +95,7 @@ class CategoryCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin)
     title = 'Админка | Создание категории'
 
 
+# Product
 class ProductListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
     template_name = 'admins/admin-product-read.html'
@@ -108,7 +104,7 @@ class ProductListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
 
 class ProductsUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
-    template_name = 'admins/admin-product-update-delete.html'
+    template_name = 'admins/admin-products-update-delete.html'
     form_class = ProductsForm
     title = 'Админка | Обновление продукта'
     success_url = reverse_lazy('admins:admins_product')
@@ -116,7 +112,7 @@ class ProductsUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin)
 
 class ProductsCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
-    template_name = 'admins/admin-product-create.html'
+    template_name = 'admins/admin-products-create.html'
     form_class = ProductsForm
     title = 'Админка | Создание продукта'
     success_url = reverse_lazy('admins:admins_product')

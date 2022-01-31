@@ -35,12 +35,13 @@ class UserAdminProfileForm(UserProfilerForm):
 
 
 class CategoryUpdateFormAdmin(forms.ModelForm):
-    discount = forms.IntegerField(widget=forms.NumberInput(), label='Скидка', required=False, min_value=0,
-                                  max_value=100, initial=0)
+    # name = forms.CharField(widget=forms.TextInput())
+    # description = forms.CharField(widget=forms.TextInput(), required=False)
+    # # is_active = forms.BooleanField(widget=forms.CheckboxInput())
 
     class Meta:
         model = ProductCategory
-        fields = ('name', 'description', 'discount')
+        fields = ('name', 'description')
 
     def __init__(self, *args, **kwargs):
         super(CategoryUpdateFormAdmin, self).__init__(*args, **kwargs)
