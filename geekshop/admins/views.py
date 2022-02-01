@@ -99,7 +99,7 @@ class CategoryCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin)
 class ProductListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
     template_name = 'admins/admin-product-read.html'
-    title = 'Админка | Обновления категории'
+    title = 'Админка | Продукты'
 
 
 class ProductsUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
